@@ -1,18 +1,24 @@
 <div class="container">
   <h2>Gerador de Certificados</h2>
 
-  <label for="professor">Professor:</label>
-  <select id="professor" [(ngModel)]="certificado.professor">
-    <option *ngFor="let prof of professores" [value]="prof">{{ prof }}</option>
-  </select>
+  <div>
+    <label for="professor">Professor:</label>
+    <select id="professor" [(ngModel)]="certificado.professor">
+      <option *ngFor="let prof of professores" [value]="prof">{{ prof }}</option>
+    </select>
+  </div>
 
-  <label for="nome">Nome do Aluno:</label>
-  <input type="text" id="nome" [(ngModel)]="novoAluno.nome">
+  <div>
+    <label for="nome">Nome do Aluno:</label>
+    <input type="text" id="nome" [(ngModel)]="novoAluno.nome">
+  </div>
 
-  <label for="faixa">Faixa:</label>
-  <select id="faixa" [(ngModel)]="novoAluno.faixa">
-    <option *ngFor="let faixa of faixas" [value]="faixa">{{ faixa }}</option>
-  </select>
+  <div>
+    <label for="faixa">Faixa:</label>
+    <select id="faixa" [(ngModel)]="novoAluno.faixa">
+      <option *ngFor="let faixa of faixas" [value]="faixa">{{ faixa }}</option>
+    </select>
+  </div>
 
   <button (click)="adicionarAluno()">Adicionar Aluno</button>
   <button class="delete-all" (click)="removerTodosAlunos()">Excluir Todos</button>
@@ -40,10 +46,11 @@
   <label for="dataEvento">Data do Evento:</label>
   <input type="date" id="dataEvento" [(ngModel)]="certificado.dataEvento">
 
-  <label>
-    <input type="checkbox" id="certificadoPersonalizado" [(ngModel)]="certificado.personalizado" (change)="toggleProjetos()">
-    Certificado Personalizado com Logo
-  </label>
+  <div class="checkbox-container">
+    <input type="checkbox" id="certificadoPersonalizado" [(ngModel)]="certificado.personalizado"
+      (change)="toggleProjetos()">
+    <label for="certificadoPersonalizado">Certificado Personalizado com Logo</label>
+  </div>
 
   <select id="projetos" [class.hidden]="!certificado.personalizado" [(ngModel)]="certificado.projeto">
     <option *ngFor="let projeto of projetos" [value]="projeto">{{ projeto }}</option>

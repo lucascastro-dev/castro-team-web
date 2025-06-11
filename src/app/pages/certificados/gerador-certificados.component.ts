@@ -1,30 +1,36 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Component } from '@angular/core';
+import { CertificadosService } from './CertificadosService';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-gerador-certificados',
   templateUrl: './gerador-certificados.component.html',
-  styleUrls: ['./gerador-certificados.component.css']
+  styleUrls: ['./gerador-certificados.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class GeradorCertificadosComponent {
-  professores = ['Marcelo', 'Junior', 'Lucas', 'Kessia'];
-  faixas = [
-    'Branca Ponta Cinza', 'Cinza', 'Cinza Ponta Azul', 'Azul',
-    'Azul Ponta Amarela', 'Amarela', 'Amarela Ponta Laranja',
-    'Laranja', 'Verde', 'Roxa', 'Marrom', 'Preta'
-  ];
-  projetos = ['SER', 'AMADOM', 'SCTJ', 'SESV'];
+  professores: string[] = [];
+  faixas: string[] = [];
+  projetos: string[] = [];
 
   alunos: { nome: string; faixa: string }[] = [];
   novoAluno = { nome: '', faixa: '' };
   certificado = {
-    professor: 'Marcelo',
+    professor: '',
     dataEvento: '',
     personalizado: false,
     projeto: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private certificadosService: CertificadosService) { }
+
+  ngOnInit(): void {
+    this.professores = this.certificadosService.getProfessores();
+    this.faixas = this.certificadosService.getFaixas();
+    this.projetos = this.certificadosService.getProjetos();
+  }
 
   adicionarAluno() {
     if (this.novoAluno.nome && this.novoAluno.faixa) {
@@ -66,8 +72,8 @@ export class GeradorCertificadosComponent {
 
     this.http.post('http://localhost:3000/salvar_certificado.php', dados)
       .subscribe(
-        response => alert('Certificados gerados com sucesso!'),
-        error => alert('Erro ao gerar certificados.')
+        () => alert('Certificados gerados com sucesso!'),
+        () => alert('Erro ao gerar certificados.')
       );
   }
 }

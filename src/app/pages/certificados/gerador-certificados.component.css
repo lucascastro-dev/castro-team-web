@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -13,6 +19,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 500px;
+  align-self: center;
 }
 
 h2 {
@@ -85,4 +92,20 @@ td {
 
 .hidden {
   display: none;
+}
+
+.checkbox-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.checkbox-container label {
+ margin-top: 0;
+}
+
+input[type="checkbox" i] {
+  width: fit-content !important;
 }
