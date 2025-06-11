@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOY_DIR=/home/lsoluti1/repositories/castro-team-web/public_html
+    - export DEPLOY_DIR=/home/lsoluti1/public_html/castro-team
     - echo "Instalando dependências do Angular..."
     - /opt/cpanel/ea-nodejs16/bin/npm install
     - echo "Realizando o build da aplicação..."
