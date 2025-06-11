@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Gerador de Certificados</h2>
+
+  <label for="professor">Professor:</label>
+  <select id="professor" [(ngModel)]="certificado.professor">
+    <option *ngFor="let prof of professores" [value]="prof">{{ prof }}</option>
+  </select>
+
+  <label for="nome">Nome do Aluno:</label>
+  <input type="text" id="nome" [(ngModel)]="novoAluno.nome">
+
+  <label for="faixa">Faixa:</label>
+  <select id="faixa" [(ngModel)]="novoAluno.faixa">
+    <option *ngFor="let faixa of faixas" [value]="faixa">{{ faixa }}</option>
+  </select>
+
+  <button (click)="adicionarAluno()">Adicionar Aluno</button>
+  <button class="delete-all" (click)="removerTodosAlunos()">Excluir Todos</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Faixa</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aluno of alunos; let i = index">
+        <td>{{ aluno.nome }}</td>
+        <td>{{ aluno.faixa }}</td>
+        <td class="actions">
+          <button (click)="editarAluno(i)">Editar</button>
+          <button class="delete-all" (click)="removerAluno(i)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <label for="dataEvento">Data do Evento:</label>
+  <input type="date" id="dataEvento" [(ngModel)]="certificado.dataEvento">
+
+  <label>
+    <input type="checkbox" id="certificadoPersonalizado" [(ngModel)]="certificado.personalizado" (change)="toggleProjetos()">
+    Certificado Personalizado com Logo
+  </label>
+
+  <select id="projetos" [class.hidden]="!certificado.personalizado" [(ngModel)]="certificado.projeto">
+    <option *ngFor="let projeto of projetos" [value]="projeto">{{ projeto }}</option>
+  </select>
+
+  <button (click)="gerarCertificados()">Gerar Certificados</button>
+</div>
