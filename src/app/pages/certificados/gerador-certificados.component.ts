@@ -59,7 +59,7 @@ export class GeradorCertificadosComponent {
     }
   }
 
-  gerarCertificados() {
+   gerarCertificados() {
     if (!this.certificado.dataEvento) {
       alert('Por favor, selecione a data do evento.');
       return;
@@ -70,10 +70,22 @@ export class GeradorCertificadosComponent {
       alunos: this.alunos
     };
 
-    this.http.post('http://localhost:3000/salvar_certificado.php', dados)
+    this.http.post('./salvar_certificado.php', dados, { responseType: 'text' })
       .subscribe(
-        () => alert('Certificados gerados com sucesso!'),
-        () => alert('Erro ao gerar certificados.')
+        (msg: string) => {
+          alert(msg);
+          this.limparFormulario();
+        },
+        (error) => {
+          console.error(error);
+          alert('Erro ao salvar certificado.');
+        }
       );
+  }
+
+  limparFormulario() {
+    this.certificado.dataEvento = '';
+    this.professores = [];
+    this.alunos = [];
   }
 }
